@@ -139,7 +139,8 @@ export type IsSingleDateDisabled = (
 export type IsRangeDateDisabled = (
   date: number,
   position: 'start' | 'end',
-  value: [number, number] | null
+  value: [number, number] | null,
+  type: 'date' | 'month' | 'year' | 'quarter'
 ) => boolean
 
 export interface TimeValidator {
@@ -158,7 +159,8 @@ export type IsSingleTimeDisabled = (
 export type IsRangeTimeDisabled = (
   date: number,
   position: 'start' | 'end',
-  value: [number, number] // date must exist to have time validation
+  value: [number, number], // date must exist to have time validation
+  type: 'date' | 'month' | 'year' | 'quarter'
 ) => TimeValidator
 
 export interface DatePickerInst {

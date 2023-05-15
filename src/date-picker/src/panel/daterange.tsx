@@ -113,7 +113,7 @@ export default defineComponent({
                     [`${mergedClsPrefix}-date-panel-date--end`]:
                       dateItem.endOfSpan,
                     [`${mergedClsPrefix}-date-panel-date--disabled`]:
-                      this.mergedIsDateDisabled(dateItem.ts)
+                      this.mergedIsDateDisabled(dateItem)
                   }
                 ]}
                 onClick={() => {
@@ -203,7 +203,7 @@ export default defineComponent({
                     [`${mergedClsPrefix}-date-panel-date--end`]:
                       dateItem.endOfSpan,
                     [`${mergedClsPrefix}-date-panel-date--disabled`]:
-                      this.mergedIsDateDisabled(dateItem.ts)
+                      this.mergedIsDateDisabled(dateItem)
                   }
                 ]}
                 onClick={() => {

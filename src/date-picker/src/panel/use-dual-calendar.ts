@@ -30,6 +30,7 @@ import {
 import { usePanelCommon, usePanelCommonProps } from './use-panel-common'
 import {
   datePickerInjectionKey,
+  type IsRangeDateDisabled,
   type RangePanelChildComponentRefs,
   type Shortcuts
 } from '../interface'
@@ -348,26 +349,33 @@ function useDualCalendar (
   }
 
   // The function is used on date panel, not the date-picker value validation
-  function mergedIsDateDisabled (ts: number): boolean {
+  function mergedIsDateDisabled ({
+    ts,
+    type
+  }: DateItem | MonthItem | YearItem | QuarterItem): boolean {
     const isDateDisabled = isDateDisabledRef.value
     if (!isDateDisabled) return false
-    if (!Array.isArray(props.value)) return isDateDisabled(ts, 'start', null)
+    if (!Array.isArray(props.value)) { return (isDateDisabled as IsRangeDateDisabled)(ts, 'start', null, type) }
     if (selectingPhaseRef.value === 'start') {
       // before you really start to select
-      return isDateDisabled(ts, 'start', null)
+      return (isDateDisabled as IsRangeDateDisabled)(ts, 'start', null, type)
     } else {
       const { value: memorizedStartDateTime } = memorizedStartDateTimeRef
       // after you starting to select
       if (ts < memorizedStartDateTimeRef.value) {
-        return isDateDisabled(ts, 'start', [
-          memorizedStartDateTime,
-          memorizedStartDateTime
-        ])
+        return (isDateDisabled as IsRangeDateDisabled)(
+          ts,
+          'start',
+          [memorizedStartDateTime, memorizedStartDateTime],
+          type
+        )
       } else {
-        return isDateDisabled(ts, 'end', [
-          memorizedStartDateTime,
-          memorizedStartDateTime
-        ])
+        return (isDateDisabled as IsRangeDateDisabled)(
+          ts,
+          'end',
+          [memorizedStartDateTime, memorizedStartDateTime],
+          type
+        )
       }
     }
   }
@@ -407,7 +415,7 @@ function useDualCalendar (
   }
   function handleDateMouseEnter (dateItem: DateItem): void {
     if (isSelectingRef.value) {
-      if (mergedIsDateDisabled(dateItem.ts)) return
+      if (mergedIsDateDisabled(dateItem)) return
       if (dateItem.ts >= memorizedStartDateTimeRef.value) {
         changeStartEndTime(
           memorizedStartDateTimeRef.value,
