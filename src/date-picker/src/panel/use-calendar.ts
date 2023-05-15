@@ -182,12 +182,19 @@ function useCalendar (
     if (type === 'quarter') return getTime(startOfQuarter(value))
     return getTime(startOfDay(value))
   }
-  function mergedIsDateDisabled (ts: number): boolean {
+  function mergedIsDateDisabled (
+    dateItem: DateItem | MonthItem | YearItem | QuarterItem
+  ): boolean {
     const {
       isDateDisabled: { value: isDateDisabled }
     } = validation
     if (!isDateDisabled) return false
-    return (isDateDisabled as IsSingleDateDisabled)(ts)
+    return (isDateDisabled as IsSingleDateDisabled)(
+      dateItem.ts,
+      undefined,
+      undefined,
+      dateItem.type
+    )
   }
   function handleDateInput (value: string): void {
     const date = strictParse(
@@ -264,7 +271,7 @@ function useCalendar (
   function handleDateClick (
     dateItem: DateItem | MonthItem | YearItem | QuarterItem
   ): void {
-    if (mergedIsDateDisabled(dateItem.ts)) {
+    if (mergedIsDateDisabled(dateItem)) {
       return
     }
     let newValue: number

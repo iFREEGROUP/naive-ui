@@ -58,7 +58,7 @@ export default defineComponent({
               [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--selected`]:
                 item.selected,
               [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--disabled`]:
-                !useAsQuickJump && mergedIsDateDisabled(item.ts)
+                !useAsQuickJump && mergedIsDateDisabled(item)
             }
           ]}
           onClick={() => {

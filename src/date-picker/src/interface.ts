@@ -130,7 +130,12 @@ export const datePickerInjectionKey =
   createInjectionKey<DatePickerInjection>('n-date-picker')
 
 export type IsDateDisabled = IsSingleDateDisabled | IsRangeDateDisabled
-export type IsSingleDateDisabled = (date: number) => boolean
+export type IsSingleDateDisabled = (
+  date: number,
+  _unused1: undefined,
+  _unused2: undefined,
+  type: 'date' | 'month' | 'year' | 'quarter'
+) => boolean
 export type IsRangeDateDisabled = (
   date: number,
   position: 'start' | 'end',
@@ -144,7 +149,12 @@ export interface TimeValidator {
 }
 
 export type IsTimeDisabled = IsSingleTimeDisabled | IsRangeTimeDisabled
-export type IsSingleTimeDisabled = (date: number) => TimeValidator
+export type IsSingleTimeDisabled = (
+  date: number,
+  _unused1: undefined,
+  _unused2: undefined,
+  type: 'date' | 'month' | 'year' | 'quarter'
+) => TimeValidator
 export type IsRangeTimeDisabled = (
   date: number,
   position: 'start' | 'end',
