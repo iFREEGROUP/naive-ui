@@ -835,6 +835,11 @@ export default defineComponent({
               disabled={disabled}
               tabindex={-1}
               autofocus={this.autofocus}
+              title={
+                this.patternInputFocused
+                  ? undefined
+                  : getTitleAttribute(this.label)
+              }
               onFocus={this.handlePatternInputFocus}
               onBlur={this.handlePatternInputBlur}
               onInput={this.handlePatternInputInput as any}
