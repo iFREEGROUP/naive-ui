@@ -143,6 +143,7 @@ form-debug.vue
 | actions | `Array<'clear' \| 'confirm'> \| null` | `['clear', 'confirm']` | MonthRange 类型的 Date Picker 中支持的用户操作 | 2.28.3 |
 | end-placeholder | `string` | `'结束月份'` | MonthRange 中 end 选框的提示信息 | 2.28.3 |
 | format | `string` | `'yyyy-MM-dd'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) | 2.28.3 |
+| is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | 日期禁用的校验函数 |  |
 | close-on-select | `boolean` | `false` | 用户选择时间范围后是否自动关闭面板 | 2.28.3 |
 | separator | `string` | `'至'` | start 选框与 end 选框之间的分隔符 | 2.28.3 |
 | start-placeholder | `string` | `'开始月份'` | MonthRange 中 start 选框的提示信息 | 2.28.3 |

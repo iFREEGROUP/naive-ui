@@ -5,7 +5,8 @@ import type { DatePickerSetupProps } from './DatePicker'
 import type {
   IsRangeTimeDisabled,
   IsSingleTimeDisabled,
-  IsSingleDateDisabled
+  IsSingleDateDisabled,
+  IsRangeDateDisabled
 } from './interface'
 
 export function uniCalendarValidation (
@@ -122,30 +123,30 @@ export function dualCalendarValidation (
     )
   }
   const isStartDateInvalidRef = computed(() => {
-    const { type, isDateDisabled } = props
+    const { isDateDisabled } = props
     const { value } = mergedValueRef
-    if (
-      value === null ||
-      !Array.isArray(value) ||
-      !['daterange', 'datetimerange'].includes(type) ||
-      !isDateDisabled
-    ) {
+    if (value === null || !Array.isArray(value) || !isDateDisabled) {
       return false
     }
-    return isDateDisabled(value[0], 'start', value)
+    return (isDateDisabled as IsRangeDateDisabled)(
+      value[0],
+      'start',
+      value,
+      'date'
+    )
   })
   const isEndDateInvalidRef = computed(() => {
-    const { type, isDateDisabled } = props
+    const { isDateDisabled } = props
     const { value } = mergedValueRef
-    if (
-      value === null ||
-      !Array.isArray(value) ||
-      !['daterange', 'datetimerange'].includes(type) ||
-      !isDateDisabled
-    ) {
+    if (value === null || !Array.isArray(value) || !isDateDisabled) {
       return false
     }
-    return isDateDisabled(value[1], 'end', value)
+    return (isDateDisabled as IsRangeDateDisabled)(
+      value[1],
+      'end',
+      value,
+      'date'
+    )
   })
   const isStartTimeInvalidRef = computed(() => {
     const { type } = props
