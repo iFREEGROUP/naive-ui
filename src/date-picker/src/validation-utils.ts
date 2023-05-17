@@ -42,7 +42,12 @@ export function uniCalendarValidation (
     ) {
       return false
     }
-    return (isDateDisabled as IsSingleDateDisabled)(value)
+    return (isDateDisabled as IsSingleDateDisabled)(
+      value,
+      undefined,
+      undefined,
+      'date'
+    )
   })
   const isTimeInvalidRef = computed(() => {
     const { type } = props
