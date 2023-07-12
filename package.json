@@ -1,5 +1,5 @@
 {
-  "name": "@ifreegroup/naive-ui",
+  "name": "@forked-pkgs/naive-ui",
   "version": "2.34.4-patch.1",
   "description": "A Vue 3 Component Library. Fairly Complete, Theme Customizable, Uses TypeScript, Fast",
   "main": "lib/index.js",
